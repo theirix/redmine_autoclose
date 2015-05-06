@@ -15,7 +15,6 @@ module RedmineAutoclose
         project.issues.where(:status_id => status_resolved).each do |issue|
           when_resolved = when_issue_resolved(issue, status_resolved)
           yield [issue, when_resolved] if when_resolved && when_resolved < config.interval_time
-          return
         end
       end
     end
