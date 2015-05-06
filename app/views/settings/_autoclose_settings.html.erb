@@ -1,0 +1,22 @@
+<%=t 'autoclose.greeting' %>
+
+<p><label><%=t 'autoclose.interval.label' %>: </label>
+<%= text_field_tag 'settings[autoclose_interval]', @settings['autoclose_interval'] %><br />
+<em><%=t 'autoclose.interval.description' %></em>
+</p>
+
+<p><label><%=t 'autoclose.user.label' %>: </label>
+<%= select_tag 'settings[autoclose_user]', 
+  options_for_select(User.where(status: 1).collect{|u| [u.name,u.mail]}, @settings['autoclose_user']) %><br />
+  <em><%=t 'autoclose.user.description' %></em>
+</p>
+
+<p><label><%=t 'autoclose.note.label' %>: </label>
+<%= text_area_tag 'settings[autoclose_note]', @settings['autoclose_note'], :size => '50x5' %><br />
+<em><%=t 'autoclose.note.description' %></em>
+</p>
+
+<p><label><%=t 'autoclose.projects.label' %>: </label>
+<%= text_field_tag 'settings[autoclose_projects]', @settings['autoclose_projects'], :size => 50 %><br />
+<em><%=t 'autoclose.projects.description' %></em>
+</p>

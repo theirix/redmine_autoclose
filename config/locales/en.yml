@@ -1,0 +1,16 @@
+# English strings go here for Rails i18n
+en:
+  autoclose:
+    greeting: 'Autoclose plugin'
+    user:
+      label: 'User who closes'
+      description: 'Specifies an user who posts automatic notifications'
+    note:
+      label: 'Note text'
+      description: 'Message to post to an issue'
+    projects:
+      label: 'Included projects'
+      description: 'Comma-separated list of projects to watch'
+    interval:
+      label: 'Check interval'
+      description: 'Amount of days for issue to became closed'

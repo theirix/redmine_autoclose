@@ -1,0 +1,25 @@
+= Redmine Autoclose plugin
+
+Plugin automatially closes an issue that have been resolved but not closed
+for a specified interval.
+
+== Configuration
+
+Plugin provides a settings page where one can specify:
+* check interval - amount of days after which an issue is treated as stalled.
+* comment text - comment posted to the issue.
+* user - an user who posts notification. Admin by default.
+* projects - a comma-separated list of project identifiers included with checking.
+
+== Launching
+
+Plugin provides two rake tasks:
+1. <tt>autoclose:autoclose</tt> - Plugin finds affected issues and updates them.
+
+2. <tt>autoclose:preview</tt> - Plugin finds affected issues and prints them to STDERR without actual updating.
+
+You can place into crontab something like that:
+
+	0 1 * * * cd REDMINE_ROOT && bundle exec rake autoclose:autoclose RAILS_ENV=production
+	
+	
