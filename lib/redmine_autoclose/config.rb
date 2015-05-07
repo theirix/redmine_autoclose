@@ -9,7 +9,7 @@ module RedmineAutoclose
 
     def user
       unless @user
-        user_email = Setting.plugin_redmine_autoclose['autoclose_autoclose']
+        user_email = Setting.plugin_redmine_autoclose['autoclose_user']
         if user_email.blank? 
           @user = User.where(:admin => true).first
         else
