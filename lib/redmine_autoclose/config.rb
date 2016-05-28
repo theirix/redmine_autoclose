@@ -13,7 +13,7 @@ module RedmineAutoclose
         if user_email.blank? 
           @user = User.where(:admin => true).first
         else
-          @user = User.where(:mail => user_email).first
+          @user = User.find_by_mail(user_email)
           raise 'Cannot find autoclose user ' + user_email unless @user
         end
         logger.info("redmine_autoclose: using autoclose user #{@user.mail}") if logger
