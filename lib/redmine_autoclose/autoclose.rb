@@ -4,8 +4,8 @@ module RedmineAutoclose
 
     def self.when_issue_resolved issue, status_resolved
       issue.journals.reverse_each do |j|
-        status_change = j.detail_for_attribute('status_id')
-        return j.created_on if status_change && status_change.value.to_i == status_resolved.id
+        status_change = j.new_value_for('status_id')
+        return j.created_on if status_change && status_change.to_i == status_resolved.id
       end
     end
 
