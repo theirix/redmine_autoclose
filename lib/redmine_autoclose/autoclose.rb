@@ -7,6 +7,7 @@ module RedmineAutoclose
         status_change = j.new_value_for('status_id')
         return j.created_on if status_change && status_change.to_i == status_resolved.id
       end
+      nil
     end
 
     def self.enumerate_issues config
@@ -17,7 +18,7 @@ module RedmineAutoclose
         STDERR.puts "redmine_autoclose: looking to #{project.id}"
         project.issues.where(:status_id => status_resolved).each do |issue|
           when_resolved = when_issue_resolved(issue, status_resolved)
-          STDERR.puts "redmine_autoclose: checking issue #{issue.id} of project '#{project.id}' with date #{when_resolved} => #{when_resolved < config.interval_time}"
+          STDERR.puts "redmine_autoclose: checking issue #{issue.id} of project '#{project.id}' with date #{when_resolved}"
           yield [issue, when_resolved] if when_resolved && when_resolved < config.interval_time
         end
       end
