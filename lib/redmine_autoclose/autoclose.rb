@@ -12,7 +12,9 @@ module RedmineAutoclose
     def self.enumerate_issues config
       STDERR.puts "redmine_autoclose: interval #{config.interval_time}, ids #{config.projects}"
       status_resolved = IssueStatus.find_by_name('Resolved')
+      STDERR.puts "redmine_autoclose: issues #{IssueStatus.all.map { |i| i.inspect }.join}, choosen: #{status_resolved}"
       Project.where('projects.identifier in (?)', config.projects).each do |project|
+        STDERR.puts "redmine_autoclose: looking to #{project.id}"
         project.issues.where(:status_id => status_resolved).each do |issue|
           when_resolved = when_issue_resolved(issue, status_resolved)
           STDERR.puts "redmine_autoclose: checking issue #{issue.id} of project '#{project.id}' with date #{when_resolved} => #{when_resolved < config.interval_time}"
