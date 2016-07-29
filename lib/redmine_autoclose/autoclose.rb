@@ -7,6 +7,7 @@ module RedmineAutoclose
         status_change = j.new_value_for('status_id')
         return j.created_on if status_change && status_change.to_i == status_resolved.id
       end
+      nil
     end
 
     def self.enumerate_issues config
