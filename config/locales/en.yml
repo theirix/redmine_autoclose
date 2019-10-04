@@ -10,7 +10,7 @@ en:
       description: 'Message to post to an issue'
     projects:
       label: 'Included projects'
-      description: 'Comma-separated list of projects to watch'
+      description: 'Comma-separated list of projects to watch (or * to select all projects)'
     interval:
       label: 'Check interval'
       description: 'Amount of days for issue to became closed'

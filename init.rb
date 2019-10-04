@@ -3,7 +3,7 @@ Redmine::Plugin.register :redmine_autoclose do
   author 'Eugene Seliverstov'
   author_url 'http://omniverse.ru'
   description 'Autoclose plugin'
-  version '0.0.4'
+  version '0.0.5'
   url 'http://github.com/theirix/redmine_autoclose'
 
   require 'redmine_autoclose'
@@ -14,5 +14,5 @@ Redmine::Plugin.register :redmine_autoclose do
     'autoclose_interval' => RedmineAutoclose::Config::DEFAULT_INTERVAL,
     'autoclose_note' => "Issue is closed because it was resolved for a while."
   },
-  :partial => 'settings/autoclose_settings'  
+  :partial => 'settings/autoclose_settings'
 end

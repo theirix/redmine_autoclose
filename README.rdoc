@@ -3,7 +3,7 @@
 Plugin automatially closes an issue that have been resolved but not closed
 for a specified interval.
 
-Works with Redmine 3.x, 2.6, 2.4.
+Works with Redmine 4.x, 3.x, 2.6, 2.4.
 
 == Configuration
 
@@ -11,7 +11,7 @@ Plugin provides a settings page where one can specify:
 * check interval - amount of days after which an issue is treated as stalled.
 * comment text - comment posted to the issue.
 * user - an user who posts notification. Admin by default.
-* projects - a comma-separated list of project identifiers included with checking.
+* projects - a comma-separated list of project identifiers included with checking, or * for all projects.
 
 == Launching
 
