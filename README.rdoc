@@ -22,6 +22,6 @@ Plugin provides two rake tasks:
 
 You can place into crontab something like that:
 
-	0 1 * * * cd REDMINE_ROOT && bundle exec rake autoclose:autoclose RAILS_ENV=production
+    0 1 * * * cd REDMINE_ROOT && bundle exec rake autoclose:autoclose RAILS_ENV=production
 	
 	
