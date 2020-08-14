@@ -1,5 +1,5 @@
 module RedmineAutoclose
-  
+
   class Autoclose
 
     def self.when_issue_resolved issue, status_resolved
@@ -39,15 +39,17 @@ module RedmineAutoclose
     def self.autoclose
       config = RedmineAutoclose::Config.new
       status_closed = IssueStatus.find_by_name('Closed')
-      self.enumerate_issues(config) do |issue, _|
-        STDERR.puts "Autoclosing issue \##{issue.id} (#{issue.subject})"
-        journal = issue.init_journal(config.user, config.note)
-        raise 'Error creating journal' unless journal
-        issue.status = status_closed
-        issue.save
+      Mailer.with_synched_deliveries do
+        self.enumerate_issues(config) do |issue, _|
+          STDERR.puts "Autoclosing issue \##{issue.id} (#{issue.subject})"
+          journal = issue.init_journal(config.user, config.note)
+          raise 'Error creating journal' unless journal
+          issue.status = status_closed
+          issue.save
+        end
       end
     end
-  
+
   end
-  
+
 end
