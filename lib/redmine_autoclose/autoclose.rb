@@ -45,7 +45,7 @@ module RedmineAutoclose
           journal = issue.init_journal(config.user, config.note)
           raise 'Error creating journal' unless journal
           issue.status = status_closed
-          issue.save
+          issue.save(validate: false)
         end
       end
     end
