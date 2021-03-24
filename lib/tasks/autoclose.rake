@@ -1,16 +1,16 @@
 namespace :autoclose do
 
-  desc <<-END_DESC
-Find affected issues and update them
+  desc <<~END_DESC
+    Find affected issues and update them
   END_DESC
   task :autoclose => :environment do
-    RedmineAutoclose::Autoclose.autoclose()
+    RedmineAutoclose::Autoclose.autoclose
   end
 
-  desc <<-END_DESC
-Find affected issues and preview them without updating
+  desc <<~END_DESC
+    Find affected issues and preview them without updating
   END_DESC
   task :preview => :environment do
-    RedmineAutoclose::Autoclose.preview()
+    RedmineAutoclose::Autoclose.preview
   end
 end

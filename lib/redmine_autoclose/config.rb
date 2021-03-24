@@ -1,16 +1,15 @@
 module RedmineAutoclose
-  
   class Config
     DEFAULT_INTERVAL = 30
-  
+
     def logger
-       Rails.logger if Rails.logger.info?
+      Rails.logger if Rails.logger.info?
     end
 
     def user
       unless @user
         user_email = Setting.plugin_redmine_autoclose['autoclose_user']
-        if user_email.blank? 
+        if user_email.blank?
           @user = User.where(:admin => true).first
         else
           @user = User.find_by_mail(user_email)
@@ -22,13 +21,13 @@ module RedmineAutoclose
     end
 
     def interval_time
-      unless @interval_time    
+      unless @interval_time
         @interval_time = (Setting.plugin_redmine_autoclose['autoclose_interval'] or DEFAULT_INTERVAL).to_i.days.ago
         logger.info("redmine_autoclose: using interval #{@interval_time}") if logger
       end
       @interval_time
     end
-    
+
     def note
       unless @note
         @note = Setting.plugin_redmine_autoclose['autoclose_note']
@@ -36,16 +35,14 @@ module RedmineAutoclose
       end
       @note
     end
-    
+
     def projects
       unless @projects
         @projects = (Setting.plugin_redmine_autoclose['autoclose_projects'] or '')
-          .split(',').map(&:strip) - ['']
+                    .split(',').map(&:strip) - ['']
         logger.info("redmine_autoclose: projects #{@projects.join(',')}") if logger
       end
       @projects
     end
-
   end
-
 end

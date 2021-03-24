@@ -1,0 +1,29 @@
+AllCops:
+  DisplayCopNames: true
+
+Documentation:
+  Enabled: false
+
+Metrics:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
+
+Style/StderrPuts:
+  Enabled: false

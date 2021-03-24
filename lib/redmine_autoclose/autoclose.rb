@@ -1,8 +1,6 @@
 module RedmineAutoclose
-
   class Autoclose
-
-    def self.when_issue_resolved issue, status_resolved
+    def self.when_issue_resolved(issue, status_resolved)
       issue.journals.reverse_each do |j|
         status_change = j.new_value_for('status_id')
         return j.created_on if status_change && status_change.to_i == status_resolved.id
@@ -10,9 +8,9 @@ module RedmineAutoclose
       nil
     end
 
-    def self.enumerate_issues config
+    def self.enumerate_issues(config)
       status_resolved = IssueStatus.find_by_name('Resolved')
-      if config.projects == ['*']
+      if config.projects == ['*'] # rubocop:disable Style/ConditionalAssignment
         projects = Project.all
       else
         projects = Project.where('projects.identifier in (?)', config.projects)
@@ -26,12 +24,11 @@ module RedmineAutoclose
     end
 
     def self.preview
-
       config = RedmineAutoclose::Config.new
-      self.enumerate_issues(config) do |issue, when_resolved|
-        STDERR.puts("Preview issue \##{issue.id} (#{issue.subject}), " +
-          "status '#{issue.status.name}', " +
-          "with text '#{config.note.split('\\n').first.strip}...', " +
+      enumerate_issues(config) do |issue, when_resolved|
+        STDERR.puts("Preview issue \##{issue.id} (#{issue.subject}), " \
+          "status '#{issue.status.name}', " \
+          "with text '#{config.note.split('\\n').first.strip}...', " \
           "resolved #{when_resolved}")
       end
     end
@@ -40,16 +37,15 @@ module RedmineAutoclose
       config = RedmineAutoclose::Config.new
       status_closed = IssueStatus.find_by_name('Closed')
       Mailer.with_synched_deliveries do
-        self.enumerate_issues(config) do |issue, _|
+        enumerate_issues(config) do |issue, _|
           STDERR.puts "Autoclosing issue \##{issue.id} (#{issue.subject})"
           journal = issue.init_journal(config.user, config.note)
           raise 'Error creating journal' unless journal
+
           issue.status = status_closed
           issue.save(validate: false)
         end
       end
     end
-
   end
-
 end
