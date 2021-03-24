@@ -11,6 +11,9 @@ en:
     projects:
       label: 'Included projects'
       description: 'Comma-separated list of projects to watch (or * to select all projects)'
+    active:
+      label: 'Only active projects'
+      description: 'Consider only active (non-closed and non-archived) projects'
     interval:
       label: 'Check interval'
       description: 'Amount of days for issue to became closed'

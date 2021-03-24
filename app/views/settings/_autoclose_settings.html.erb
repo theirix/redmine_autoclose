@@ -6,7 +6,7 @@
 </p>
 
 <p><label><%=t 'autoclose.user.label' %>: </label>
-<%= select_tag 'settings[autoclose_user]', 
+<%= select_tag 'settings[autoclose_user]',
   options_for_select(User.where(status: 1).collect{|u| [u.name,u.mail]}, @settings['autoclose_user']) %><br />
   <em><%=t 'autoclose.user.description' %></em>
 </p>
@@ -19,6 +19,11 @@
 <p><label><%=t 'autoclose.projects.label' %>: </label>
 <%= text_field_tag 'settings[autoclose_projects]', @settings['autoclose_projects'], :size => 50 %><br />
 <em><%=t 'autoclose.projects.description' %></em>
+</p>
+
+<p><label><%=t 'autoclose.active.label' %>: </label>
+<%= check_box_tag 'settings[autoclose_active]', '1', (@settings['autoclose_active'] || '0') == '1' %><br />
+<em><%=t 'autoclose.active.description' %></em>
 </p>
 
 <p><label><%=t 'autoclose.resolved_status.label' %>: </label>

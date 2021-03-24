@@ -10,10 +10,11 @@ module RedmineAutoclose
 
     def self.enumerate_issues(config)
       status_resolved = config.resolved_status
+      projects_scope = config.active ? Project.active : Project
       if config.projects == ['*'] # rubocop:disable Style/ConditionalAssignment
-        projects = Project.all
+        projects = projects_scope.all
       else
-        projects = Project.where('projects.identifier in (?)', config.projects)
+        projects = projects_scope.where('projects.identifier in (?)', config.projects)
       end
       projects.each do |project|
         project.issues.where(:status_id => status_resolved).each do |issue|
