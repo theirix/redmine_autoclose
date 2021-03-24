@@ -14,3 +14,7 @@ en:
     interval:
       label: 'Check interval'
       description: 'Amount of days for issue to became closed'
+    resolved_status:
+      label: 'Resolved status'
+    closed_status:
+      label: 'Closed status'

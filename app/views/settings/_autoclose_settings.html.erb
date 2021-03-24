@@ -20,3 +20,13 @@
 <%= text_field_tag 'settings[autoclose_projects]', @settings['autoclose_projects'], :size => 50 %><br />
 <em><%=t 'autoclose.projects.description' %></em>
 </p>
+
+<p><label><%=t 'autoclose.resolved_status.label' %>: </label>
+<%= select_tag 'settings[autoclose_resolved_status]',
+  options_for_select(IssueStatus.pluck(:name), @settings['autoclose_resolved_status'] || 'Resolved') %><br />
+</p>
+
+<p><label><%=t 'autoclose.closed_status.label' %>: </label>
+<%= select_tag 'settings[autoclose_closed_status]',
+  options_for_select(IssueStatus.pluck(:name), @settings['autoclose_closed_status'] || 'Closed') %><br />
+</p>

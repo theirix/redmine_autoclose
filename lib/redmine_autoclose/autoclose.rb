@@ -9,7 +9,7 @@ module RedmineAutoclose
     end
 
     def self.enumerate_issues(config)
-      status_resolved = IssueStatus.find_by_name('Resolved')
+      status_resolved = config.resolved_status
       if config.projects == ['*'] # rubocop:disable Style/ConditionalAssignment
         projects = Project.all
       else
@@ -35,7 +35,7 @@ module RedmineAutoclose
 
     def self.autoclose
       config = RedmineAutoclose::Config.new
-      status_closed = IssueStatus.find_by_name('Closed')
+      status_closed = config.closed_status
       Mailer.with_synched_deliveries do
         enumerate_issues(config) do |issue, _|
           STDERR.puts "Autoclosing issue \##{issue.id} (#{issue.subject})"
