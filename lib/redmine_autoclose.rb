@@ -1,3 +1,3 @@
 require 'json'
-require 'redmine_autoclose/config'
-require 'redmine_autoclose/autoclose'
+require File.dirname(__FILE__) + '/redmine_autoclose/config'
+require File.dirname(__FILE__) + '/redmine_autoclose/autoclose'

@@ -3,7 +3,7 @@
 Plugin automatially closes an issue that have been resolved but not closed
 for a specified interval.
 
-Works with Redmine 4.x, 3.x, 2.6, 2.4.
+Works with Redmine 5.0, 4.x, 3.x, 2.6, 2.4.
 
 == Configuration
 

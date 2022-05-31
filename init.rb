@@ -3,10 +3,10 @@ Redmine::Plugin.register :redmine_autoclose do
   author 'Eugene Seliverstov'
   author_url 'http://omniverse.ru'
   description 'Autoclose plugin'
-  version '0.0.8'
+  version '0.0.9'
   url 'http://github.com/theirix/redmine_autoclose'
 
-  require 'redmine_autoclose'
+  require File.dirname(__FILE__) + '/lib/redmine_autoclose'
 
   settings :default => {
     'autoclose_user' => '',
@@ -17,5 +17,5 @@ Redmine::Plugin.register :redmine_autoclose do
     'autoclose_closed_status' => 'Closed',
     'autoclosed_active' => '0'
   },
-           :partial => 'settings/autoclose_settings'
+  :partial => 'settings/autoclose_settings'
 end
