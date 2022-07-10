@@ -3,7 +3,7 @@ Redmine::Plugin.register :redmine_autoclose do
   author 'Eugene Seliverstov'
   author_url 'http://omniverse.ru'
   description 'Autoclose plugin'
-  version '0.0.9'
+  version '0.0.10'
   url 'http://github.com/theirix/redmine_autoclose'
 
   require File.dirname(__FILE__) + '/lib/redmine_autoclose'
