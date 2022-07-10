@@ -40,11 +40,13 @@ module RedmineAutoclose
       Mailer.with_synched_deliveries do
         enumerate_issues(config) do |issue, _|
           STDERR.puts "Autoclosing issue \##{issue.id} (#{issue.subject})"
-          journal = issue.init_journal(config.user, config.note)
-          raise 'Error creating journal' unless journal
+          issue.with_lock do
+            journal = issue.init_journal(config.user, config.note)
+            raise 'Error creating journal' unless journal
 
-          issue.status = status_closed
-          issue.save(validate: false)
+            issue.status = status_closed
+            issue.save(validate: false)
+          end
         end
       end
     end
