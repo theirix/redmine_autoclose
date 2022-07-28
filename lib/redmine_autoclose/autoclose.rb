@@ -1,15 +1,16 @@
 module RedmineAutoclose
   class Autoclose
-    def self.when_issue_resolved(issue, status_resolved)
+    def self.when_issue_resolved(issue, statuses_resolved)
+      statuses_resolved_ids = statuses_resolved.map(&:id)
       issue.journals.reverse_each do |j|
         status_change = j.new_value_for('status_id')
-        return j.created_on if status_change && status_change.to_i == status_resolved.id
+        return j.created_on if status_change && statuses_resolved_ids.include?(status_change.to_i)
       end
       nil
     end
 
     def self.enumerate_issues(config)
-      status_resolved = config.resolved_status
+      statuses_resolved = config.resolved_statuses
       projects_scope = config.active ? Project.active : Project
       if config.projects == ['*'] # rubocop:disable Style/ConditionalAssignment
         projects = projects_scope.all
@@ -17,8 +18,8 @@ module RedmineAutoclose
         projects = projects_scope.where('projects.identifier in (?)', config.projects)
       end
       projects.each do |project|
-        project.issues.where(:status_id => status_resolved).each do |issue|
-          when_resolved = when_issue_resolved(issue, status_resolved)
+        project.issues.where(status_id: statuses_resolved).each do |issue|
+          when_resolved = when_issue_resolved(issue, statuses_resolved)
           yield [issue, when_resolved] if when_resolved && when_resolved < config.interval_time
         end
       end
