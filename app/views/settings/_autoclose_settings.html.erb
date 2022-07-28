@@ -26,9 +26,11 @@
 <em><%=t 'autoclose.active.description' %></em>
 </p>
 
-<p><label><%=t 'autoclose.resolved_status.label' %>: </label>
-<%= select_tag 'settings[autoclose_resolved_status]',
-  options_for_select(IssueStatus.pluck(:name), @settings['autoclose_resolved_status'] || 'Resolved') %><br />
+<p><label><%=t 'autoclose.resolved_statuses.label' %>: </label>
+<%= select_tag 'settings[autoclose_resolved_statuses]',
+  options_for_select(IssueStatus.pluck(:name), @settings['autoclose_resolved_statuses'] || [@settings['autoclose_resolved_status']]),
+  multiple: true,
+  size: 5 %><br />
 </p>
 
 <p><label><%=t 'autoclose.closed_status.label' %>: </label>

@@ -19,5 +19,7 @@ en:
       description: 'Amount of days for issue to became closed'
     resolved_status:
       label: 'Resolved status'
+    resolved_statuses:
+      label: 'Resolved statuses'
     closed_status:
       label: 'Closed status'
