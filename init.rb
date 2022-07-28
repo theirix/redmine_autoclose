@@ -10,7 +10,7 @@ Redmine::Plugin.register :redmine_autoclose do
 
   settings :default => {
     'autoclose_user' => '',
-    'autoclose_projects' => '',
+    'autoclose_projects' => '*',
     'autoclose_interval' => RedmineAutoclose::Config::DEFAULT_INTERVAL,
     'autoclose_note' => 'Issue is closed because it was resolved for a while.',
     'autoclose_resolved_status' => 'Resolved',
