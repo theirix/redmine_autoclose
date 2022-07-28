@@ -28,7 +28,7 @@ module RedmineAutoclose
     def self.preview
       config = RedmineAutoclose::Config.new
       enumerate_issues(config) do |issue, when_resolved|
-        STDERR.puts("Preview issue \##{issue.id} (#{issue.subject}), " \
+        $stderr.puts("Preview issue \##{issue.id} (#{issue.subject}), " \
           "status '#{issue.status.name}', " \
           "with text '#{config.note.split('\\n').first.strip}...', " \
           "resolved #{when_resolved}")
@@ -40,7 +40,7 @@ module RedmineAutoclose
       status_closed = config.closed_status
       Mailer.with_synched_deliveries do
         enumerate_issues(config) do |issue, _|
-          STDERR.puts "Autoclosing issue \##{issue.id} (#{issue.subject})"
+          $stderr.puts "Autoclosing issue \##{issue.id} (#{issue.subject})"
           issue.with_lock do
             journal = issue.init_journal(config.user, config.note)
             raise 'Error creating journal' unless journal

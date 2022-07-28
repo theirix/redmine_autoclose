@@ -13,7 +13,7 @@ module RedmineAutoclose
           @user = User.where(:admin => true).first
         else
           @user = User.find_by_mail(user_email)
-          raise 'Cannot find autoclose user ' + user_email unless @user
+          raise "Cannot find autoclose user #{user_email}" unless @user
         end
         logger.info("redmine_autoclose: using autoclose user #{@user.mail}") if logger
       end
@@ -56,7 +56,8 @@ module RedmineAutoclose
     end
 
     def closed_status
-      @closed_status ||= IssueStatus.find_by_name(Setting.plugin_redmine_autoclose['autoclose_closed_status'] || 'Closed')
+      name = Setting.plugin_redmine_autoclose['autoclose_closed_status'] || 'Closed'
+      @closed_status ||= IssueStatus.find_by_name(name)
     end
   end
 end
