@@ -49,8 +49,10 @@ module RedmineAutoclose
       @active ||= (Setting.plugin_redmine_autoclose['autoclose_active'] || '0') == '1'
     end
 
-    def resolved_status
-      @resolved_status ||= IssueStatus.find_by_name(Setting.plugin_redmine_autoclose['autoclose_resolved_status'] || 'Resolved')
+    def resolved_statuses
+      names = Setting.plugin_redmine_autoclose['autoclose_resolved_statuses'] || \
+              [Setting.plugin_redmine_autoclose['autoclose_resolved_status']]
+      @resolved_statuses ||= names.map { |name| IssueStatus.find_by_name(name) }
     end
 
     def closed_status
