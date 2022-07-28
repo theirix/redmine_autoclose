@@ -12,6 +12,8 @@ Plugin provides a settings page where one can specify:
 * comment text - comment posted to the issue.
 * user - an user who posts notification. Admin by default.
 * projects - a comma-separated list of project identifiers included with checking, or * for all projects.
+* resolved statuses - one or more statuses interpeted as resolved .
+* closed status - which status to use as a closed status.
 
 == Launching
 
