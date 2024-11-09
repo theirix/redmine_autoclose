@@ -37,3 +37,11 @@
 <%= select_tag 'settings[autoclose_closed_status]',
   options_for_select(IssueStatus.pluck(:name), @settings['autoclose_closed_status'] || 'Closed') %><br />
 </p>
+
+<p><label><%=t 'autoclose.trackers.label' %>: </label>
+<%= select_tag 'settings[autoclose_trackers]',
+  options_for_select(Tracker.pluck(:name), @settings['autoclose_trackers'] || [@settings['autoclose_trackers']]),
+  multiple: true,
+  size: 5 %><br />
+  <em><%=t 'autoclose.trackers.description' %></em>
+</p>

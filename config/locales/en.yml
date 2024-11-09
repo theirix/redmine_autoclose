@@ -23,3 +23,6 @@ en:
       label: 'Resolved statuses'
     closed_status:
       label: 'Closed status'
+    trackers:
+      label: 'Included trackers'
+      description: 'Which trackers to consider. If not specified, all trackers will be used'

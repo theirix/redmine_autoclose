@@ -17,8 +17,14 @@ module RedmineAutoclose
       else
         projects = projects_scope.where('projects.identifier in (?)', config.projects)
       end
+      if config.trackers.empty?
+        tracker_ids = Tracker.pluck(:id)
+      else
+        tracker_ids = config.trackers.map(&:id)
+      end
+      $stderr.puts("Searching among #{projects.size} projects with tracker ids: #{tracker_ids}")
       projects.each do |project|
-        project.issues.where(status_id: statuses_resolved).each do |issue|
+        project.issues.where(status_id: statuses_resolved, tracker_id: tracker_ids).each do |issue|
           when_resolved = when_issue_resolved(issue, statuses_resolved)
           yield [issue, when_resolved] if when_resolved && when_resolved < config.interval_time
         end

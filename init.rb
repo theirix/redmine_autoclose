@@ -16,7 +16,8 @@ Redmine::Plugin.register :redmine_autoclose do
     'autoclose_resolved_status' => 'Resolved',
     'autoclose_resolved_statuses' => ['Resolved'],
     'autoclose_closed_status' => 'Closed',
-    'autoclosed_active' => '0'
+    'autoclosed_active' => '0',
+    'autoclose_trackers' => []
   },
   :partial => 'settings/autoclose_settings'
 end

@@ -59,5 +59,11 @@ module RedmineAutoclose
       name = Setting.plugin_redmine_autoclose['autoclose_closed_status'] || 'Closed'
       @closed_status ||= IssueStatus.find_by_name(name)
     end
+
+    def trackers
+      names = Setting.plugin_redmine_autoclose['autoclose_trackers']
+      @trackers ||= names.map { |name| Tracker.find_by_name(name) }
+    end
+
   end
 end
