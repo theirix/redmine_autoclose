@@ -49,6 +49,10 @@ module RedmineAutoclose
       @active ||= (Setting.plugin_redmine_autoclose['autoclose_active'] || '0') == '1'
     end
 
+    def project_names
+      @project_names ||= (Setting.plugin_redmine_autoclose['autoclose_project_names'] || '0') == '1'
+    end
+
     def resolved_statuses
       names = Setting.plugin_redmine_autoclose['autoclose_resolved_statuses'] || \
               [Setting.plugin_redmine_autoclose['autoclose_resolved_status']]

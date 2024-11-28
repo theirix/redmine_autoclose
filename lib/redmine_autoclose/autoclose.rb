@@ -15,7 +15,10 @@ module RedmineAutoclose
       if config.projects == ['*'] # rubocop:disable Style/ConditionalAssignment
         projects = projects_scope.all
       else
-        projects = projects_scope.where('projects.identifier in (?)', config.projects)
+        patterns = config.projects.map { |p| p.strip.gsub('*', '%') }
+        field = config.project_names ? 'projects.name' : 'projects.identifier'
+        sql_conditions = patterns.map { |_| "#{field} LIKE ?" }.join(' OR ')
+        projects = projects_scope.where(sql_conditions, *patterns)
       end
       if config.trackers.empty?
         tracker_ids = Tracker.pluck(:id)

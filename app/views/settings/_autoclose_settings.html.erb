@@ -21,6 +21,11 @@
 <em><%=t 'autoclose.projects.description' %></em>
 </p>
 
+<p><label><%=t 'autoclose.project_names.label' %>: </label>
+  <%= check_box_tag 'settings[autoclose_project_names]', '1', (@settings['autoclose_project_names'] || '0') == '1' %><br />
+  <em><%=t 'autoclose.project_names.description' %></em>
+</p>
+
 <p><label><%=t 'autoclose.active.label' %>: </label>
 <%= check_box_tag 'settings[autoclose_active]', '1', (@settings['autoclose_active'] || '0') == '1' %><br />
 <em><%=t 'autoclose.active.description' %></em>
