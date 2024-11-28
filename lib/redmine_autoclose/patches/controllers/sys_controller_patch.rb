@@ -11,7 +11,7 @@ module RedmineAutoclose
         module InstanceMethods
           def autoclose_issues_preview
             begin
-              RedmineAutoclose::Autoclose.preview
+              RedmineAutoclose::Autoclose.preview(use_logger: true)
               head :ok # Return HTTP 200 OK if successful
             rescue StandardError => e
               Rails.logger.error("Error in autoclose_issues_preview: #{e.message}")
@@ -21,7 +21,7 @@ module RedmineAutoclose
 
           def autoclose_issues
             begin
-              RedmineAutoclose::Autoclose.autoclose
+              RedmineAutoclose::Autoclose.autoclose(use_logger: true)
               head :ok # Return HTTP 200 OK if successful
             rescue StandardError => e
               Rails.logger.error("Error in autoclose_issues: #{e.message}")
