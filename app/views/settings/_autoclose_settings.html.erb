@@ -32,21 +32,23 @@
 </p>
 
 <p><label><%=t 'autoclose.resolved_statuses.label' %>: </label>
-<%= select_tag 'settings[autoclose_resolved_statuses]',
-  options_for_select(IssueStatus.pluck(:name), @settings['autoclose_resolved_statuses'] || [@settings['autoclose_resolved_status']]),
+<%= select_tag 'settings[autoclose_resolved_status_ids]',
+  options_for_select(IssueStatus.sorted.collect{|status| [status.name, status.id.to_s]},
+                     @settings['autoclose_resolved_status_ids']),
   multiple: true,
   size: 5 %><br />
 </p>
 
 <p><label><%=t 'autoclose.closed_status.label' %>: </label>
-<%= select_tag 'settings[autoclose_closed_status]',
-  options_for_select(IssueStatus.pluck(:name), @settings['autoclose_closed_status'] || 'Closed') %><br />
+<%= select_tag 'settings[autoclose_closed_status_id]',
+  options_for_select(IssueStatus.sorted.collect{|status| [status.name, status.id.to_s]},
+                     @settings['autoclose_closed_status_id'] \
+                       || IssueStatus.find_by(name: 'Done'){|status| [status.name, status.id.to_s]}) %><br />
 </p>
 
 <p><label><%=t 'autoclose.trackers.label' %>: </label>
-<%= select_tag 'settings[autoclose_trackers]',
-  options_for_select(Tracker.pluck(:name), @settings['autoclose_trackers'] || [@settings['autoclose_trackers']]),
-  multiple: true,
-  size: 5 %><br />
-  <em><%=t 'autoclose.trackers.description' %></em>
+  <%= select_tag 'settings[autoclose_tracker_ids]',
+                 options_for_select(Tracker.sorted.collect {|t| [t.name, t.id.to_s]}, @settings['autoclose_tracker_ids'] || []),
+                 multiple: true,
+                 size: 5 %><br />
 </p>
