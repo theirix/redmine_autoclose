@@ -1,6 +1,18 @@
 module RedmineAutoclose
   class Config
     DEFAULT_INTERVAL = 30
+    DEFAULT_SOURCE_STATUS = 'Resolved'
+    DEFAULT_TARGET_STATUS = 'Closed'
+
+    def self.source_status_ids
+      status = IssueStatus.find_by(name: DEFAULT_SOURCE_STATUS)
+      status ? [status.id] : ['']
+    end
+
+    def self.target_status_id
+      status = IssueStatus.find_by(name: DEFAULT_TARGET_STATUS)
+      status ? status.id : ''
+    end
 
     def logger
       Rails.logger if Rails.logger.info?
@@ -39,7 +51,7 @@ module RedmineAutoclose
     def projects
       unless @projects
         @projects = (Setting.plugin_redmine_autoclose['autoclose_projects'] or '')
-                    .split(',').map(&:strip) - ['']
+                      .split(',').map(&:strip) - ['']
         logger.info("redmine_autoclose: projects #{@projects.join(',')}") if logger
       end
       @projects
@@ -49,21 +61,30 @@ module RedmineAutoclose
       @active ||= (Setting.plugin_redmine_autoclose['autoclose_active'] || '0') == '1'
     end
 
+    def project_names
+      @project_names ||= (Setting.plugin_redmine_autoclose['autoclose_project_names'] || '0') == '1'
+    end
+
     def resolved_statuses
-      names = Setting.plugin_redmine_autoclose['autoclose_resolved_statuses'] || \
-              [Setting.plugin_redmine_autoclose['autoclose_resolved_status']]
-      @resolved_statuses ||= names.map { |name| IssueStatus.find_by_name(name) }
+      status_ids = Setting.plugin_redmine_autoclose['autoclose_resolved_status_ids'] || []
+      status_ids = status_ids.is_a?(Array) ? status_ids : status_ids.split(',')
+      status_ids = status_ids.map(&:to_s).map(&:strip)
+      valid_statuses = IssueStatus.where(id: status_ids).collect
+      @resolved_statuses ||= valid_statuses.presence || []
     end
 
     def closed_status
-      name = Setting.plugin_redmine_autoclose['autoclose_closed_status'] || 'Closed'
-      @closed_status ||= IssueStatus.find_by_name(name)
+      closed_status_id = Setting.plugin_redmine_autoclose['autoclose_closed_status_id'] \
+        || IssueStatus.find_by(name: DEFAULT_TARGET_STATUS)&.id
+      @closed_status ||= IssueStatus.find_by(id: closed_status_id)
     end
 
     def trackers
-      names = Setting.plugin_redmine_autoclose['autoclose_trackers']
-      @trackers ||= names.map { |name| Tracker.find_by_name(name) }
+      tracker_ids = Setting.plugin_redmine_autoclose['autoclose_tracker_ids'] || []
+      tracker_ids = tracker_ids.is_a?(Array) ? tracker_ids : tracker_ids.split(',')
+      tracker_ids = tracker_ids.map(&:to_s).map(&:strip)
+      valid_trackers = Tracker.where(id: tracker_ids).collect
+      @trackers ||= valid_trackers.presence || []
     end
-
   end
 end

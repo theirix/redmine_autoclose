@@ -1,0 +1,31 @@
+# French strings for Rails i18n
+fr:
+  autoclose:
+    greeting: 'Plugin de fermeture automatique'
+    user:
+      label: 'Utilisateur'
+      description: 'Utilisateur utilisé pour fermer le ticket.'
+    note:
+      label: 'Texte de la note'
+      description: 'Message indiqué comme raison dans le ticket.'
+    projects:
+      label: 'Projets inclus'
+      description: 'Liste des projets à surveiller, séparés par des virgules (ou * pour sélectionner tous les projets). * est possible comme caractère générique.'
+    active:
+      label: 'Projets actifs uniquement'
+      description: 'Ne prend en compte que les projets actifs (ni fermés, ni archivés).'
+    project_names:
+      label: 'Noms des projets au lieu des identifiants'
+      description: 'Recherche par noms de projets au lieu des identifiants. Si désactivé, la liste des projets s’applique aux identifiants.'
+    interval:
+      label: 'Intervalle de vérification'
+      description: 'Nombre de jours avant qu’un ticket ne soit fermé.'
+    resolved_status:
+      label: 'Statut résolu'
+    resolved_statuses:
+      label: 'Statuts résolus'
+    closed_status:
+      label: 'Statut fermé'
+    trackers:
+      label: 'Traceurs pris en charge'
+      description: 'Seuls les traceurs sélectionnés sont pris en compte. Si vide, tous les traceurs sont utilisés.'

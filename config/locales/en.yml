@@ -14,15 +14,18 @@ en:
     active:
       label: 'Only active projects'
       description: 'Consider only active (non-closed and non-archived) projects'
+    project_names:
+      label: 'Search for names instead of identifiers'
+      description: 'Use project names instead of identifiers for search'
     interval:
       label: 'Check interval'
       description: 'Amount of days for issue to became closed'
     resolved_status:
-      label: 'Resolved status'
+      label: 'Source status'
     resolved_statuses:
-      label: 'Resolved statuses'
+      label: 'Source statuses'
     closed_status:
-      label: 'Closed status'
+      label: 'Target status'
     trackers:
-      label: 'Included trackers'
-      description: 'Which trackers to consider. If not specified, all trackers will be used'
+      label: 'Supported trackers'
+      description: 'Only selected trackers are considered. If empty, all trackers are used.'

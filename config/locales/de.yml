@@ -1,0 +1,31 @@
+# German strings for Rails i18n
+de:
+  autoclose:
+    greeting: 'Autoclose-Plugin'
+    user:
+      label: 'Benutzer'
+      description: 'Benutzer, der zum Schließem des Tickets verwendet wird.'
+    note:
+      label: 'Notiztext'
+      description: 'Nachricht, die als Grund im Ticket angegeben wird.'
+    projects:
+      label: 'Eingeschlossene Projekte'
+      description: 'Kommaseparierte Liste von Projekten, die überwacht werden sollen (oder * um alle Projekte auszuwählen). * als Wildcard möglich.'
+    active:
+      label: 'Nur aktive Projekte'
+      description: 'Berücksichtigt nur aktive (nicht geschlossene und nicht archivierte) Projekte'
+    project_names:
+      label: 'Projektnamen statt Identifiers'
+      description: 'Suche nach Projektnamen statt Identifiers. Wenn deaktiviert, gilt die Projektliste für die Identifier.'
+    interval:
+      label: 'Überprüfungsintervall'
+      description: 'Anzahl der Tage, bis ein Ticket geschlossen wird'
+    resolved_status:
+      label: 'Ausgangsstatus'
+    resolved_statuses:
+      label: 'Ausgangsstatus'
+    closed_status:
+      label: 'Zielstatus'
+    trackers:
+      label: 'Unterstützte Tracker'
+      description: 'Nur ausgewählte Tracker werden berücksichtigt. Wenn leer, werden alle Tracker verwendet.'
