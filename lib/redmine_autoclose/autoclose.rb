@@ -47,10 +47,12 @@ module RedmineAutoclose
     def self.preview(use_logger: false)
       config = RedmineAutoclose::Config.new
       enumerate_issues(config, use_logger) do |issue, when_resolved|
-        log(use_logger, "Preview issue \##{issue.id} : #{issue.tracker.name} : #{issue.project.name} : (#{issue.subject}), " \
-          "status '#{issue.status.name}', " \
-          "with text '#{config.note.split('\\n').first.strip}...', " \
-          "resolved #{when_resolved}")
+        text = config.note.split('\\n').first&.strip
+        log(use_logger, \
+            "Preview issue \##{issue.id} : #{issue.tracker.name} : #{issue.project.name} : (#{issue.subject}), " \
+            "status '#{issue.status.name}', " \
+            "#{text.blank? ? 'without text' : "with text '#{text}...'"}, " \
+            "resolved #{when_resolved}")
       end
     end
 
@@ -59,7 +61,8 @@ module RedmineAutoclose
       status_closed = config.closed_status
       Mailer.with_synched_deliveries do
         enumerate_issues(config, use_logger) do |issue, _|
-          log(use_logger, "Autoclosing issue \##{issue.id} : #{issue.tracker.name} : #{issue.project.name} : (#{issue.subject})")
+          log(use_logger, \
+              "Autoclosing issue \##{issue.id} : #{issue.tracker.name} : #{issue.project.name} : (#{issue.subject})")
           issue.with_lock do
             journal = issue.init_journal(config.user, config.note)
             raise 'Error creating journal' unless journal
