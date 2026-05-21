@@ -6,7 +6,7 @@ Redmine::Plugin.register :redmine_autoclose do
   author 'Eugene Seliverstov'
   author_url 'https://omniverse.ru'
   description 'Plugin to close issues automatically.'
-  version '0.2.1'
+  version '0.2.2'
   url 'https://github.com/theirix/redmine_autoclose'
   requires_redmine version_or_higher: '4.0.0'
 

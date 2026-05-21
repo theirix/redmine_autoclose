@@ -3,7 +3,7 @@
 The plugin automatically closes issues that have been resolved but not closed for a specified
 interval.
 
-Compatible with Redmine versions: 5.x, 4.x.
+Compatible with Redmine versions: 6.1, 5.x, 4.x.
 
 ## Configuration
 
