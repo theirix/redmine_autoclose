@@ -6,8 +6,11 @@
 </p>
 
 <p><label><%=t 'autoclose.user.label' %>: </label>
+<% autoclose_users = User.where(status: 1).collect{|u| [u.name, u.mail]} %>
+<% autoclose_user = @settings['autoclose_user'] if autoclose_users.any? {|_, mail| mail == @settings['autoclose_user']} %>
 <%= select_tag 'settings[autoclose_user]',
-  options_for_select(User.where(status: 1).collect{|u| [u.name,u.mail]}, @settings['autoclose_user']) %><br />
+  options_for_select(autoclose_users, autoclose_user || ''),
+  include_blank: true %><br />
   <em><%=t 'autoclose.user.description' %></em>
 </p>
 
